@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  creationTimestamp: null
+  labels:
+    type: base-project-quota
+  name: base-project-quota
+spec:
+  hard:
+    limits.memory: {{ project_limits_memory }}
+    requests.memory: {{ project_requests_memory | default(project_limits_memory) }}
+    limits.cpu: {{ project_limits_cpu_cores | default("1") }}
+    requests.cpu: {{ project_requests_cpu_cores | default("1") }}
+    pods: {{ project_pods | default("10") }}
+    requests.storage: {{ project_requests_storage | default("0") }}
